@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parkinson's Detector</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 600px;
+        padding: 40px;
+        text-align: center;
+        background-color: #f8f8ff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333333;
+        margin-top: 0;
+        font-size: 32px;
+        font-weight: 600;
+      }
+
+      h2 {
+        color: #555555;
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      h4 {
+        color: #555555;
+
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #777777;
+        line-height: 1.5;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .file-upload-label {
+        background-color: #7d96cc;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .file-upload-label:hover {
+        background-color: #6c86b5;
+      }
+
+      .submit-button {
+        background-color: #8f6bbf;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-button:hover {
+        background-color: #7c58a9;
+      }
+
+      .diagnosis {
+        background-color: #e6e6fa;
+        padding: 20px;
+        margin-top: 40px;
+        border-radius: 5px;
+      }
+
+      .diagnosis h2 {
+        margin: 0;
+        color: #555555;
+        font-size: 24px;
+      }
+
+      .inst {
+        background-color: #d6f5f5;
+        color: #ffffff;
+        padding: 5px 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        line-height: 0;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Parkinson's Detector</h1>
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <h2>Upload Traced Image</h2>
+        <input
+          type="file"
+          id="image-upload"
+          name="image"
+          accept=".png, .jpg, .jpeg"
+          required
+        />
+        <label for="image-upload" class="file-upload-label">Choose File</label>
+        <p class="file-name" id="image-file-name"></p>
+        <h2>Upload Sound File</h2>
+        <input
+          type="file"
+          id="sound-upload"
+          name="sound"
+          accept=".wav, .mp3"
+          required
+        />
+        <label for="sound-upload" class="file-upload-label">Choose File</label>
+        <p class="file-name" id="sound-file-name"></p>
+        <br /><br />
+        <input type="submit" value="Predict" class="submit-button" />
+      </form>
+      <!-- Trace Test Instructions -->
+      <div class="inst">
+        <h4>Trace Test Instructions</h4>
+        <p>1. Take meander image and trace the pattern using a pen .</p>
+
+        <p>2. Take a clear photo of the traced image and upload it.</p>
+      </div>
+
+      <!-- Sound Test Instructions -->
+      <div class="inst">
+        <h4>Sound Test Instructions</h4>
+        <p>1. Record a short voice clip(10s) using microphone.</p>
+        <p>2. Say "aaa" into the microphone clearly.Upload it.</p>
+      </div>
+      <script>
+        document
+          .getElementById("image-upload")
+          .addEventListener("change", function () {
+            var fileInput = document.getElementById("image-upload");
+            var fileName = document.getElementById("image-file-name");
+            fileName.innerText = "Selected File: " + fileInput.files[0].name;
+          });
+        document
+          .getElementById("sound-upload")
+          .addEventListener("change", function () {
+            var fileInput = document.getElementById("sound-upload");
+            var fileName = document.getElementById("sound-file-name");
+            fileName.innerText = "Selected File: " + fileInput.files[0].name;
+          });
+      </script>
+    </div>
+  </body>
+</html>
